@@ -42,4 +42,8 @@ function addEmployee(firstName, lastName, roleId, managerId) {
     return db.promise().query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)", [firstName, lastName, roleId, managerId]);
 }
 
-module.exports = { viewAllEmployees, viewAllRoles, viewAllDepartments, addDepartment, addRole, addEmployee };
+function updateEmployeeRole(employeeId, roleId) {
+    return db.promise().query("UPDATE employee SET role_id = ? WHERE id = ?", [roleId, employeeId]);
+}
+
+module.exports = { viewAllEmployees, viewAllRoles, viewAllDepartments, addDepartment, addRole, addEmployee, updateEmployeeRole };

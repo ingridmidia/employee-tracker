@@ -1,5 +1,5 @@
 const inquirer = require("inquirer");
-const { viewAllEmployees, viewAllRoles, viewAllDepartments, addDepartment, addRole, addEmployee } = require("./helpers/queries");
+const { viewAllEmployees, viewAllRoles, viewAllDepartments, addDepartment, addRole, addEmployee, updateEmployeeRole } = require("./helpers/queries");
 
 function managementOptions() {
     const options = [{
@@ -55,6 +55,17 @@ const addEmployeeQuestions = [{
     name: "managerId"
 }];
 
+const updateEmployeeRoleQuestions = [{
+    type: "input",
+    message: "Which employee's role do you want to update? Please type employee's id",
+    name: "employeeId"
+},
+{
+    type: "input",
+    message: "Which role do you want to assign the employee? Please type the role id",
+    name: "roleId"
+}];
+
 function handleOption(option) {
     switch (option.managementAction) {
         case "View All Employees":
@@ -74,7 +85,15 @@ function handleOption(option) {
                 });
             break;
         case "Update Employee Role":
-            console.log("not implemented yet");
+            inquirer
+                .prompt(updateEmployeeRoleQuestions)
+                .then(function (answer) {
+                    updateEmployeeRole(answer.employeeId, answer.roleId)
+                    console.log("Update employee's role");
+                })
+                .then(function () {
+                    managementOptions();
+                });
             break;
         case "View All Roles":
             viewAllRoles().then(function () {
