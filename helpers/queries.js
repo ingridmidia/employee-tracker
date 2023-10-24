@@ -10,14 +10,14 @@ const db = mysql.createConnection(
 );
 
 function viewAllEmployees() {
-    return db.promise().query("SELECT * FROM employee")
+    return db.promise().query(`SELECT employee.id, employee.first_name, employee.last_name, role.title, role.salary, department.name AS department_name, CONCAT(manager.first_name, " ", manager.last_name) AS manager_name FROM employee JOIN role ON employee.role_id = role.id JOIN department ON department.id = role.department_id LEFT JOIN employee AS manager ON employee.manager_id = manager.id`)
         .then(function (results) {
             console.table(results[0]);
         });
 }
 
 function viewAllRoles() {
-    return db.promise().query("SELECT * FROM role")
+    return db.promise().query("SELECT role.id, role.title, role.salary, department.name AS department_name FROM role JOIN department ON role.department_id = department.id")
         .then(function (results) {
             console.table(results[0]);
         });
