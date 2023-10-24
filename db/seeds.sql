@@ -1,3 +1,4 @@
+-- populates tables in database
 INSERT INTO department (name)
 VALUES ("Veterinary Medicine"),
        ("Client Care"),
@@ -12,11 +13,11 @@ VALUES ("Lead DVM", 150000, 1),
        ("Accountant", 65000, 3);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Selena", "Silva", 1, NULL),
-       ("Fausto", "Silva", 2, 1),
-       ("Jimin", "Park", 3, 1),
-       ("Shakira", "Mebarak", 3, 1),
+VALUES ("Selena", "Brown", 1, NULL),
+       ("Finn", "Davis", 2, 1),
+       ("Mia", "White", 3, 1),
+       ("Susan", "Harris", 3, 1),
        ("Maggie", "Miranda", 4, NULL),
-       ("Zeneide", "Abreu", 5, 5),
-       ("Marcos", "Moura", 5, 5),
-       ("Paulo", "Marques", 6, NULL);
+       ("Louis", "Wilson", 5, 5),
+       ("Mark", "Jones", 5, 5),
+       ("Ashley", "Miller", 6, NULL);

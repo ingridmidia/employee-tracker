@@ -9,7 +9,9 @@ const db = mysql.createConnection(
     }
 );
 
+// each function below handle one of the options that user can choose by doing the right query on the database
 function viewAllEmployees() {
+    // in this case the query needs to join columns from all 3 tables present in the database
     return db.promise().query(`SELECT employee.id, employee.first_name, employee.last_name, role.title, role.salary, department.name AS department_name, CONCAT(manager.first_name, " ", manager.last_name) AS manager_name FROM employee JOIN role ON employee.role_id = role.id JOIN department ON department.id = role.department_id LEFT JOIN employee AS manager ON employee.manager_id = manager.id`)
         .then(function (results) {
             console.table(results[0]);
@@ -17,6 +19,7 @@ function viewAllEmployees() {
 }
 
 function viewAllRoles() {
+    // in this case the query needs to join columns from 2 tables present in the database
     return db.promise().query("SELECT role.id, role.title, role.salary, department.name AS department_name FROM role JOIN department ON role.department_id = department.id")
         .then(function (results) {
             console.table(results[0]);
